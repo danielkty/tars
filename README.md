@@ -35,7 +35,7 @@ conda env create --file environment.yml
 ```
 Second, install the modified version of verl.
 ```bash
-install -e ./verl
+pip install -e ./verl
 ```
   
 ### Training
