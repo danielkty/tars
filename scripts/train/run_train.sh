@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --output=slurmjobs/%j.out
 #SBATCH --cpus-per-task=64
-#SBATCH --gres=gpu:L40S:4
+#SBATCH --gres=gpu:4
 #SBATCH --mem=256G
 #SBATCH --time=11:59:00
 
