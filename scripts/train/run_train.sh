@@ -21,7 +21,7 @@ scontrol show job -d $SLURM_JOBID | grep GRES
 nvidia-smi
 ray stop
 
-# source activate tars
+source activate tars
 
 # Train over a single node, 4 A6000 GPUs.
 python3 -m verl.trainer.main_ppo \
