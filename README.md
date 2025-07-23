@@ -33,9 +33,11 @@ First, install the Python packages.
 ```bash
 conda env create --file environment.yml
 ```
-Second, install the modified version of verl.
+Second, install the modified version of verl and additional packages.
 ```bash
 pip install -e ./verl
+pip install git+https://github.com/dsbowen/strong_reject.git@main
+pip install flash-attn
 ```
   
 ### Training
