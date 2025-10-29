@@ -52,16 +52,21 @@ logger.setLevel(os.getenv('VERL_PPO_LOGGING_LEVEL', 'WARN'))
 @retry
 def get_moderation_score(client, prompt):
     rewards = []
+    valid_prompts = [p for p in prompt if p is not None and p != ""]
     response = client.moderations.create(
         model="omni-moderation-latest",
-        input=prompt,
+        input=valid_prompts,
     )
+    valid_idx = 0
+    for p in prompt:
+        if p is not None and p != "":
+            scores = response.results[valid_idx].category_scores
+            max_score = max(scores.to_dict().values())
+            rewards.append(1 - max_score)
+            valid_idx += 1
+        else:
+            rewards.append(1.0)
 
-    for result in response.results:
-        # rewards.append(1 - result.flagged)
-        scores = result.category_scores
-        max_score = max(scores.to_dict().values())
-        rewards.append(1 - max_score)
     return rewards
 
 def create_device_mesh(world_size, fsdp_size):
